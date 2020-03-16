@@ -98,7 +98,7 @@
                         <h4>Profesional Doctor</h4>
                         <p>Lorem ipsum dolor sit amet.</p>
                     </div>
-                    <div class="<?= base_url('assets/'); ?>col-lg">
+                    <div class="col-lg">
                         <img src="<?= base_url('assets/'); ?>images/icon/hospital.png" class="float-left">
                         <h4>Profesional Doctor</h4>
                         <p>Lorem ipsum dolor sit amet.</p>
