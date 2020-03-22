@@ -83,8 +83,6 @@
             </div>
         </div>
         <!-- End of Carousel -->
-
-        <!-- TODO: Carousel mobile rapihin lagi, lanjut yg lain -->
     </div>
     <!-- END JUMBOTRON -->
 

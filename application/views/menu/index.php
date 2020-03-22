@@ -9,7 +9,7 @@
         </div>
     </div>
 
-    <!-- TODO: lanjut menu management -->
+    <!-- // ! start coding the content here -->
 
 </div>
 <!-- /.container-fluid -->

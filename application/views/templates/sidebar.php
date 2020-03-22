@@ -12,28 +12,58 @@
     <!-- Divider -->
     <hr class="sidebar-divider">
 
+
+    <!-- QUERY Menu -->
+
+    <?php
+    $role_id = $this->session->userdata('role_id');
+    $queryMenu = "SELECT `user_menu`.`id`, `menu`  
+                    FROM `user_menu` JOIN `user_access_menu`  
+                      ON `user_menu`.`id` = `user_access_menu`.`menu_id` 
+                   WHERE `user_access_menu`.`role_id` = $role_id 
+                ORDER BY `user_access_menu`.`menu_id` ASC 
+                   ";
+
+    $menu = $this->db->query($queryMenu)->result_array();
+    ?>
+
+    <!-- LOOPING MENU -->
     <!-- Heading -->
-    <div class="sidebar-heading">
-        Administrator
-    </div>
+    <?php foreach ($menu as $m) : ?>
+        <div class="sidebar-heading">
+            <?= $m['menu']; ?>
+        </div>
 
-    <!-- Nav Item - Dashboard -->
-    <li class="nav-item active">
-        <a class="nav-link" href="<?= base_url('admin') ?>">
-            <i class="fas fa-fw fa-user-cog"></i>
-            <span>Dashboard</span></a>
-    </li>
 
-    <!-- Divider -->
-    <hr class="sidebar-divider">
+        <!-- SIAPKAN SUB-MENU SESUAI MENU -->
+        <?php
 
-    <!-- Heading -->
-    <div class="sidebar-heading">
-        Menu
-    </div>
+        $menuId = $m['id'];
+        $querySubMenu = "SELECT *
+                           FROM `user_sub_menu` JOIN `user_menu`
+                             ON `user_sub_menu`.`menu_id` = `user_menu`.`id`
+                          WHERE `user_sub_menu`.`menu_id` = $menuId
+                            AND `user_sub_menu`.`is_active` = 1
+           ";
+
+        $subMenu = $this->db->query($querySubMenu)->result_array();
+        ?>
+
+        <?php foreach ($subMenu as $sm) :  ?>
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item <?= ($title == $sm['title']) ? 'active' : '' ?>">
+                <a class="nav-link" href="<?= base_url($sm['url']); ?>">
+                    <i class="<?= $sm['icon']; ?>"></i>
+                    <span><?= $sm['title']; ?></span></a>
+            </li>
+        <?php endforeach; ?>
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+    <?php endforeach; ?>
+
 
     <!-- Nav Item - Patient Menu-->
-    <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseMenu1" aria-expanded="true" aria-controls="collapseMenu1">
             <i class="fas fa-fw fa-user-injured"></i>
             <span>Patient</span>
@@ -45,36 +75,8 @@
 
             </div>
         </div>
-    </li>
+    </li>  -->
 
-    <!-- Nav Item - Doctor Menu-->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseMenu2" aria-expanded="true" aria-controls="collapseMenu1">
-            <i class="fas fa-fw fa-user-nurse"></i>
-            <span>Doctors</span>
-        </a>
-        <div id="collapseMenu2" class="collapse" aria-labelledby="headingMenu1" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="text-wrap collapse-item" href="viewdoctor.html">All doctor</a>
-                <a class="text-wrap collapse-item" href="#">Doctor profile</a>
-            </div>
-        </div>
-    </li>
-
-    <!-- Divider -->
-    <hr class="sidebar-divider">
-
-    <!-- Heading -->
-    <div class="sidebar-heading">
-        Profile
-    </div>
-
-    <!-- Nav Item - Charts -->
-    <li class="nav-item">
-        <a class="nav-link" href=" ">
-            <i class="fas fa-fw fa-user"></i>
-            <span>Edit Profile</span></a>
-    </li>
 
     <!-- Nav Item - Tables -->
     <li class="nav-item">
