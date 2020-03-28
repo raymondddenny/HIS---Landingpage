@@ -3,6 +3,14 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class User extends CI_Controller
 {
+
+    public function __construct()
+    {
+        parent::__construct();
+        // for user cannot access the url directly if not login
+        check_login();
+    }
+
     public function index()
 
     {
