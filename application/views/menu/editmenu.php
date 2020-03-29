@@ -18,7 +18,7 @@
             <form class="user" method="post" action="<?= base_url('menu/editmenu/') ?><?= $menu_byid['id']; ?>">
                 <input type="hidden" name="id" value="<?= $menu_byid['id']; ?>">
                 <div class="form-group">
-                    <input type="text" class="form-control  " id="title" name="title" value="<?= $menu_byid['menu']; ?>">
+                    <input type="text" class="form-control  " id="menu" name="menu" value="<?= $menu_byid['menu']; ?>">
                     <?= form_error('menu', '<small class="text-danger pl-2">', '</small>') ?>
                 </div>
                 <a href="<?= base_url('menu') ?>" class="btn btn-secondary ">
