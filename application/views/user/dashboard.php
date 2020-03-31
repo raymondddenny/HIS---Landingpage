@@ -5,11 +5,11 @@
     <div class="row mb-5">
         <div class="col d-sm-flex align-items-center justify-content-between">
             <h1 class="h3 mb-0 text-gray-800"><?= $title; ?></h1>
-            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
         </div>
     </div>
     <div class="row">
-        <div class="col">
+        <div class="col-lg-6">
+            <?= $this->session->flashdata('message') ?>
             <div class="card mb-3" style="max-width: 540px;">
                 <div class="row no-gutters">
                     <div class="col-md-4">
