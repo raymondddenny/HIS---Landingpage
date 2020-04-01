@@ -97,7 +97,11 @@ class Auth extends CI_Controller
         if ($this->form_validation->run() == false) {
 
             $data['title'] = "Medic Go User Registration";
+
+            // hide super admin options
+            $this->db->where('id !=', 1);
             $data['role'] = $this->db->get('user_role')->result_array();
+
             $this->load->view('templates/auth_header', $data);
             $this->load->view('auth/registration', $data);
             $this->load->view('templates/auth_footer');

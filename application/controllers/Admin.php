@@ -117,6 +117,7 @@ class Admin extends CI_Controller
         // get specific role access from table user_role
         $data['role'] = $this->db->get_where('user_role', ['id' => $role_id])->row_array();
 
+        //hide admin access
         $this->db->where('id !=', 1);
         // get all the menu
         $data['menu'] = $this->db->get('user_menu')->result_array();

@@ -28,6 +28,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <p class="text-danger">Choose the your role below :</p>
                                 <select name="role_id" id="role_id" class="form-control">
                                     <option value="">Select Role</option>
                                     <?php foreach ($role as $r) : ?>
