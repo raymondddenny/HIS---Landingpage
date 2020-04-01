@@ -27,6 +27,14 @@
                                     <input type="password" class="form-control form-control-user" id="password2" name="password2" placeholder="Repeat Password">
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <select name="role_id" id="role_id" class="form-control">
+                                    <option value="">Select Role</option>
+                                    <?php foreach ($role as $r) : ?>
+                                        <option value="<?= $r['id'] ?>"><?= $r['role'] ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
                             <button type="submit" class="btn btn-primary btn-user btn-block">
                                 Register Account
                             </button>

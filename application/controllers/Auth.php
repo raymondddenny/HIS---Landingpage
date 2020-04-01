@@ -82,6 +82,8 @@ class Auth extends CI_Controller
             redirect('user');
         }
 
+
+
         $this->form_validation->set_rules('name', 'Name', 'required|trim');
         $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[user.email]', [
             'is_unique' => 'This email has already been registered!'
@@ -95,8 +97,9 @@ class Auth extends CI_Controller
         if ($this->form_validation->run() == false) {
 
             $data['title'] = "Medic Go User Registration";
+            $data['role'] = $this->db->get('user_role')->result_array();
             $this->load->view('templates/auth_header', $data);
-            $this->load->view('auth/registration');
+            $this->load->view('auth/registration', $data);
             $this->load->view('templates/auth_footer');
         } else {
             $data = [
@@ -104,7 +107,7 @@ class Auth extends CI_Controller
                 'email' => htmlspecialchars($this->input->post('email', true)),
                 'image' => 'default.jpg',
                 'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
-                'role_id' => 2,
+                'role_id' => htmlspecialchars($this->input->post('role_id', true)),
                 'is_active' => 1,
                 'date_created' => time()
             ];
