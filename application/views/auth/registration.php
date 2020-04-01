@@ -35,6 +35,7 @@
                                         <option value="<?= $r['id'] ?>"><?= $r['role'] ?></option>
                                     <?php endforeach; ?>
                                 </select>
+                                <?= form_error('role_id', '<small class="text-danger pl-2">', '</small>') ?>
                             </div>
                             <button type="submit" class="btn btn-primary btn-user btn-block">
                                 Register Account

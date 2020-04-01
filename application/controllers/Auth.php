@@ -93,6 +93,7 @@ class Auth extends CI_Controller
             'min_length' => 'password too short!'
         ]);
         $this->form_validation->set_rules('password2', 'Password', 'required|trim|matches[password1]');
+        $this->form_validation->set_rules('role_id', 'User role', 'required|trim');
 
         if ($this->form_validation->run() == false) {
 
