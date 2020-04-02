@@ -58,7 +58,7 @@
                         <div class="row justify-content-center">
                             <div class="col-4">
                                 <h1>Free, easy to use software for developing <span> world healthcare </span>.</h1>
-                                <a class="btn btn-warning mt-3">Try it now</a>
+                                <a class="btn btn-warning mt-3" href="<?= base_url('auth') ?>">Try it now</a>
                             </div>
                             <div class="col-6"></div>
                         </div>
@@ -125,7 +125,7 @@
                     exercitationem ratione
                     aut soluta!</p>
                 <a href="#" class="btn btn-warning ">Learn more</a>
-                <p class="pt-3">Don't have an account yet? <a href="#">Get started</a>.</p>
+                <p class="pt-3">Don't have an account yet? <a href="<?= base_url('auth/registration') ?>">Get started</a>.</p>
             </div>
         </div>
         <!-- END OF DESCRIPTION -->

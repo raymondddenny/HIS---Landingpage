@@ -145,11 +145,11 @@ class Menu extends CI_Controller
         // get menubyid
         $data['submenu_byid'] = $this->db->get_where('user_sub_menu', ['id' => $id])->row_array();
 
+
         $data['menu'] = $this->db->get('user_menu')->result_array();
 
 
         $this->form_validation->set_rules('title', 'Title', 'required');
-        $this->form_validation->set_rules('menu_id', 'Menu', 'required');
         $this->form_validation->set_rules('url', 'Url', 'required');
         $this->form_validation->set_rules('icon', 'Icon', 'required');
 

@@ -15,8 +15,8 @@
 
             <!-- message if success -->
             <?= $this->session->flashdata('message') ?>
-            <form class="user" method="post" action="<?= base_url('menu/editsubmenu/') ?><?= $submenu_byid['id']; ?>">
-                <input type="hidden" name="id" value="<?= $submenu_byid['id']; ?>">
+            <form class="user" method="post" action="<?= base_url('menu/editsubmenu/') . $submenu_byid['id'] ?>">
+                <input type="hidden" name="id" value="<?= $submenu_byid['id'] ?>">
                 <div class="form-group">
                     <input type="text" class="form-control" id="title" name="title" value="<?= $submenu_byid['title']; ?>">
                 </div>
@@ -42,7 +42,10 @@
                         </label>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-info ">
+                <a href="<?= base_url('menu/submenu') ?>" class="btn btn-secondary mt-2">
+                    Back to menu management
+                </a>
+                <button type="submit" class="btn btn-info mt-2">
                     Update menu
                 </button>
             </form>

@@ -11,8 +11,7 @@
     <!-- // ! start coding the content here -->
 
     <div class="row">
-        <div class="col-lg-4">
-
+        <div class="col-lg-5 ">
             <!-- message if success -->
             <?= $this->session->flashdata('message') ?>
             <form class="user" method="post" action="<?= base_url('menu/editmenu/') ?><?= $menu_byid['id']; ?>">
@@ -21,10 +20,10 @@
                     <input type="text" class="form-control  " id="menu" name="menu" value="<?= $menu_byid['menu']; ?>">
                     <?= form_error('menu', '<small class="text-danger pl-2">', '</small>') ?>
                 </div>
-                <a href="<?= base_url('menu') ?>" class="btn btn-secondary ">
+                <a href="<?= base_url('menu') ?>" class="btn btn-secondary mt-2">
                     Back to menu management
                 </a>
-                <button type="submit" class="btn btn-info ">
+                <button type="submit" class="btn btn-info mt-2">
                     Update menu
                 </button>
             </form>

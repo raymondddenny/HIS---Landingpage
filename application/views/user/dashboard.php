@@ -8,7 +8,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-4">
             <?= $this->session->flashdata('message') ?>
             <div class="card mb-3" style="max-width: 540px;">
                 <div class="row no-gutters">
