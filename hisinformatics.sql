@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 01, 2020 at 08:40 AM
+-- Generation Time: Apr 07, 2020 at 11:59 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.2
 
@@ -19,8 +19,97 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `hisinformatics`
+-- Database: `hisinformatics-master`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `completed_requests`
+--
+
+CREATE TABLE `completed_requests` (
+  `id` int(11) NOT NULL,
+  `item_name` varchar(128) NOT NULL,
+  `notes` varchar(128) NOT NULL,
+  `completed_on` varchar(128) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `user_email` varchar(128) NOT NULL,
+  `symptoms` varchar(128) NOT NULL,
+  `blood_type` varchar(128) NOT NULL,
+  `blood_pressure` varchar(128) NOT NULL,
+  `height` int(11) NOT NULL,
+  `weight` int(11) NOT NULL,
+  `blood_glucose` varchar(128) NOT NULL,
+  `allergies` varchar(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `completed_requests`
+--
+
+INSERT INTO `completed_requests` (`id`, `item_name`, `notes`, `completed_on`, `user_id`, `user_email`, `symptoms`, `blood_type`, `blood_pressure`, `height`, `weight`, `blood_glucose`, `allergies`) VALUES
+(35, 'Hayasaka', 'collected', '1586294169', 14, 'admin@gmail.com', 'abc', 'B', 'abc', 55, 55, 'abc', 'abc');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `completed_requests_radiology`
+--
+
+CREATE TABLE `completed_requests_radiology` (
+  `id` int(11) NOT NULL,
+  `item_name` varchar(128) NOT NULL,
+  `image` varchar(128) NOT NULL,
+  `notes` varchar(128) NOT NULL,
+  `completed_on` varchar(128) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `user_email` varchar(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `request`
+--
+
+CREATE TABLE `request` (
+  `id` int(11) NOT NULL,
+  `item_name` varchar(128) NOT NULL,
+  `notes` varchar(128) NOT NULL,
+  `last_modified` varchar(128) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `user_email` varchar(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `request`
+--
+
+INSERT INTO `request` (`id`, `item_name`, `notes`, `last_modified`, `user_id`, `user_email`) VALUES
+(68, 'Chika Fujiwara', 'wiener', '1586295100', 14, 'admin@gmail.com');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `request_radiology`
+--
+
+CREATE TABLE `request_radiology` (
+  `id` int(11) NOT NULL,
+  `item_name` varchar(128) NOT NULL,
+  `notes` varchar(128) NOT NULL,
+  `last_modified` varchar(128) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `user_email` varchar(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `request_radiology`
+--
+
+INSERT INTO `request_radiology` (`id`, `item_name`, `notes`, `last_modified`, `user_id`, `user_email`) VALUES
+(3, 'Ferinzhy Halik', 'test', '1586295651', 14, 'admin@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -44,14 +133,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `name`, `email`, `image`, `password`, `role_id`, `is_active`, `date_created`) VALUES
-(2, 'raymond', 'raymond@gmail.com', 'default.jpg', '$2y$10$WNrTKAOWSYy4BaB7t.km3.WClsO5FFMZ6TFaHqt8T8DDteeEBzyge', 2, 1, 1583908692),
-(3, 'Hendra', 'hendra@gmail.com', 'default.jpg', '$2y$10$JccIBBXtCDuCpQEj24FTvOcWgtHe3wcGplVyzCKvGpzo6y4tuKSzi', 1, 1, 1583910893),
-(4, 'testuser', 'test@gmail.com', 'default.jpg', '$2y$10$/jxlZ.cbcZC3sAgV1jgxVeLjGG6d/mET3PVmVMCJhaG9kbzYpRT9O', 1, 1, 1584411172),
-(5, 'Denny Raymond', 'rayden@gmail.com', 'default.jpg', '$2y$10$wHrZvdbo.75oLNL5oefFAeZbMT3EY.71aSjpD3b6ux7b.JIq8BQFG', 1, 1, 1585471858),
-(10, 'Test User 1', 'test1@gmail.com', 'default.jpg', '$2y$10$v3lpYaXBMhVrqpoUiVkymOrh5Ill3ZP0SkbbPm.RNJoFmvQWOO.pi', 2, 1, 1585709895),
-(11, 'Test User 2', 'test2@gmail.com', 'default.jpg', '$2y$10$AxIFpralfdwhQDmqbe7ZNepzoaLHM.TMHg126fSOmdtaF7sghv8oe', 3, 1, 1585709923),
-(12, 'Noach T', 'noach@gmail.com', '2986071.jpg', '$2y$10$ce.bZruCm2PBAD5utcIkuOm1j0oxX8nH3dQJ65kuyYwl6gFVDWN4e', 3, 1, 1585710770),
-(13, 'Denny Raymond', 'denny@gmail.com', 'default.jpg', '$2y$10$bI7Tjz/rTZLKCgd8kHgfqe9HQrGs7S60L7/oQnHWgEMLadpHkYtBO', 1, 1, 1585722596);
+(14, 'Admin Account', 'admin@gmail.com', 'default.jpg', '$2y$10$SnnJ3sYll28FnL8uI89Wc.7V/dhdsxbphitiQEAKcpzALW4cLhuju', 1, 1, 1585726316),
+(15, 'Farrell', 'farrell@gmail.com', 'default.jpg', '$2y$10$Bpce2I/WzmYSv8mBfBeLYedSK7RYGbv9WSWwAFkDaIK9nR7Y8Win.', 5, 1, 1585736593);
 
 -- --------------------------------------------------------
 
@@ -78,7 +161,11 @@ INSERT INTO `user_access_menu` (`id`, `role_id`, `menu_id`) VALUES
 (6, 3, 3),
 (7, 1, 3),
 (12, 3, 2),
-(13, 3, 11);
+(13, 3, 11),
+(14, 1, 11),
+(15, 1, 5),
+(16, 5, 5),
+(17, 5, 2);
 
 -- --------------------------------------------------------
 
@@ -100,6 +187,7 @@ INSERT INTO `user_menu` (`id`, `menu`) VALUES
 (2, 'User'),
 (3, 'Patient'),
 (4, 'Menu'),
+(5, 'Lab'),
 (11, 'Medication');
 
 -- --------------------------------------------------------
@@ -155,11 +243,39 @@ INSERT INTO `user_sub_menu` (`id`, `menu_id`, `title`, `url`, `icon`, `is_active
 (14, 11, 'View completed request', 'medication/requestcompleted', 'fab fa-fw fa-youtube', 1),
 (15, 11, 'Request new prescription', 'medication/requestprescription', 'fas fa-fw fa-clipboard-list', 1),
 (16, 11, 'View request', 'medication/request', 'fas fa-fw fa-key', 1),
-(17, 2, 'Change Password', 'user/changepassword', 'fas fa-fw fa-key', 1);
+(17, 2, 'Change Password', 'user/changepassword', 'fas fa-fw fa-key', 1),
+(18, 5, 'Lab Request', 'lab/request', 'fas fa-cloud-upload-alt', 1),
+(19, 5, 'Lab Requests - Radiology', 'lab/request_radiology', 'fas fa-cloud-upload-alt', 1),
+(20, 5, 'Completed Requests', 'lab/completed_list', 'far fa-address-book', 1),
+(21, 5, 'Completed Requests - Radiology', 'lab/completed_radiology', 'far fa-address-book', 1);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `completed_requests`
+--
+ALTER TABLE `completed_requests`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `completed_requests_radiology`
+--
+ALTER TABLE `completed_requests_radiology`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `request`
+--
+ALTER TABLE `request`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `request_radiology`
+--
+ALTER TABLE `request_radiology`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `user`
@@ -196,16 +312,40 @@ ALTER TABLE `user_sub_menu`
 --
 
 --
+-- AUTO_INCREMENT for table `completed_requests`
+--
+ALTER TABLE `completed_requests`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+
+--
+-- AUTO_INCREMENT for table `completed_requests_radiology`
+--
+ALTER TABLE `completed_requests_radiology`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `request`
+--
+ALTER TABLE `request`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+
+--
+-- AUTO_INCREMENT for table `request_radiology`
+--
+ALTER TABLE `request_radiology`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `user_access_menu`
 --
 ALTER TABLE `user_access_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `user_menu`
@@ -223,7 +363,7 @@ ALTER TABLE `user_role`
 -- AUTO_INCREMENT for table `user_sub_menu`
 --
 ALTER TABLE `user_sub_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
