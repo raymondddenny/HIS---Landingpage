@@ -58,6 +58,8 @@ class Auth extends CI_Controller
                         redirect('user');
                     } else if ($user['role_id'] == 4) {
                         redirect('user');
+                    } else if ($user['role_id'] == 5) {
+                        redirect('user');
                     } else {
                         redirect('user');
                     };
@@ -81,8 +83,6 @@ class Auth extends CI_Controller
         if ($this->session->userdata('email')) {
             redirect('user');
         }
-
-
 
         $this->form_validation->set_rules('name', 'Name', 'required|trim');
         $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[user.email]', [
@@ -137,5 +137,88 @@ class Auth extends CI_Controller
     public function blocked()
     {
         $this->load->view('auth/blocked');
+    }
+
+    public function registerPatient()
+    {
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $this->form_validation->set_rules('patientMedicalRecord_id', 'Patient Medical Record ID', 'required');
+        $this->form_validation->set_rules('first_name', 'First Name', 'required');
+        $this->form_validation->set_rules('last_name', 'Last Name', 'required');
+        $this->form_validation->set_rules('phonenum', 'Phone Number', 'required');
+        $this->form_validation->set_rules('patient_address', 'Address', 'required');
+        $this->form_validation->set_rules('DOB', 'DOB', 'required');
+        $this->form_validation->set_rules('gender', 'Gender', 'required');
+
+        $data['patientMedicalRecord_id'] = $this->db->get('patient_record')->result_array();
+
+        if ($this->form_validation->run() == false) {
+            $data['title'] = "Register New Patient";
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('auth/registerPatient');
+        } else {
+            $data = [
+                'patientMedicalRecord_id' => $this->input->post('patientMedicalRecord_id'),
+                'first_name' => $this->input->post('first_name'),
+                'last_name' => $this->input->post('last_name'),
+                'phonenum' => $this->input->post('phonenum'),
+                'date_added' => time(),
+                'DOB' => $this->input->post('DOB'),
+                'patient_status' => 2,
+                'gender' => $this->input->post('gender'),
+                'patient_address' => $this->input->post('patient_address'),
+            ];
+
+            $this->db->insert('patient', $data);
+            $this->session->set_flashdata('success', '<div class="alert alert-success" role="alert"> Patient is successfuly registered! </div>');
+            redirect('auth/registerPatient');
+        }
+    }
+
+    public function registerInpatient()
+    {
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $this->form_validation->set_rules('patientMedicalRecord_id', 'Patient Medical Record ID', 'required|trim');
+        $this->form_validation->set_rules('doctor_id', 'Doctor ID', 'required|trim');
+        $this->form_validation->set_rules('payment_method', 'Payment Method', 'required');
+        $this->form_validation->set_rules('reference', 'Reference', 'required');
+        $data['patientMedicalRecord_id'] = $this->db->get('patient_record')->result_array();
+        $data['doctor_id'] = $this->db->get('doctor')->result_array();
+        $data['patient'] = $this->db->get('patient')->result_array();
+
+        if ($this->form_validation->run() == false) {
+            $data['title'] = "Register New Inpatient";
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('auth/registerInpatient');
+        } else {
+            $data = [
+                'patientMedicalRecord_id' => $this->input->post('patientMedicalRecord_id'),
+                'reference' => $this->input->post('reference'),
+                'date_in' => time(),
+                'date_out' => time(),
+                'inpatient_status' => 1,
+                'doctor_id' => $this->input->post('doctor_id'),
+                'bed_id' => 0,
+                'nurse_id' => 1,
+                'payment_method' => $this->input->post('payment_method'),
+                'room_grade' => $this->input->post('room_grade'),
+                'payment_status' => 2,
+                'payment_method' => $this->input->post('payment_method')
+            ];
+            $treatment = [
+                'diagnose' => $this->input->post('diagnose'),
+                'patientMedicalRecord_id' => $this->input->post('patientMedicalRecord_id'),
+                'date_added' => time()
+            ];
+
+            $this->db->insert('inpatient', $data);
+            $this->db->insert('inpatient_treatment', $treatment);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> Patient is successfuly registered! </div>');
+            redirect('auth/registerInpatient');
+        }
     }
 }

@@ -43,6 +43,18 @@ class Menu_model extends CI_Model
         $this->db->update('request');
     }
 
+    public function deleteitems($id)
+    {
+        $this->db->where('id', $id);
+        $this->db->delete('request');
+    }
+
+    public function deleteAltitems($id)
+    {
+        $this->db->where('id', $id);
+        $this->db->delete('request_radiology');
+    }
+
     public function view_request_detail()
     {
         $id = $this->input->post('id', true);
@@ -150,7 +162,7 @@ class Menu_model extends CI_Model
     {
         $user_name = $this->session->userdata('name');
         $query = "SELECT `user`.`id`
-                FROM `user` JOIN `request` 
+                FROM `user` JOIN `request`
                 ON `user`.`id` = `request`.`user_id`
                 WHERE `request`.`user_name` = $user_name
                 ORDER BY `request`.`user_id` ASC

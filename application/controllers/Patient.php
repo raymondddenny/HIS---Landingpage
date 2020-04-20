@@ -17,6 +17,8 @@ class Patient extends CI_Controller
         $data['title'] = "View Patient List";
 
         // get user session
+        $this->load->model("Medication_model");
+        $data["fetch_data_patient"] = $this->Medication_model->fetch_data_patient();
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
         $this->load->view('templates/header', $data);

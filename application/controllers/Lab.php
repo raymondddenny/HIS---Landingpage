@@ -38,7 +38,7 @@ class Lab extends CI_Controller
 
     public function request()
     {
-        $data['title'] = 'Lab Requests';
+        $data['title'] = 'Lab Request';
 
         //ambil data dari session
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
@@ -85,7 +85,7 @@ class Lab extends CI_Controller
 
     public function request_radiology()
     {
-        $data['title'] = 'Lab Requests - Radiology';
+        $data['title'] = 'Lab Request - Radiology';
 
         //ambil data dari session
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
@@ -191,6 +191,7 @@ class Lab extends CI_Controller
     }
 
 
+    // public function complete_request_radiology($id)
     public function complete_request_radiology($id)
     {
         $data['title'] = 'Complete a Radiology Request';
@@ -301,7 +302,7 @@ class Lab extends CI_Controller
 
     public function completed_list()
     {
-        $data['title'] = 'Completed Requests';
+        $data['title'] = 'Completed Request';
 
         //ambil data dari session
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
@@ -350,7 +351,7 @@ class Lab extends CI_Controller
 
     public function completed_list_radiology()
     {
-        $data['title'] = 'Completed Radiology Requests';
+        $data['title'] = 'Completed Radiology Request';
 
         //ambil data dari session
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
